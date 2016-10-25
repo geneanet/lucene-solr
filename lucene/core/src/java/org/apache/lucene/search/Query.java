@@ -44,6 +44,24 @@ import org.apache.lucene.index.IndexReader;
 public abstract class Query implements Cloneable {
   private float boost = 1.0f;                     // query boost factor
 
+  public enum CacheOverridePolicy {
+	  MustCache,
+	  MustNotCache,
+	  Auto;
+  }
+
+  private CacheOverridePolicy cacheOverridePolicy = CacheOverridePolicy.Auto;
+
+  public void setCacheOverridePolicy(CacheOverridePolicy c)
+  {
+	 cacheOverridePolicy = c; 
+  }
+
+  public CacheOverridePolicy getCacheOverridePolicy()
+  {
+	 return cacheOverridePolicy; 
+  }
+
   /** Sets the boost for this query clause to <code>b</code>.
    * @deprecated Use {@link BoostQuery} instead to apply boosts.
    */
